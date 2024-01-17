@@ -9,7 +9,7 @@ const incrementCount = () => {
 <template>
   <main>
     <TheHero>
-      <template v-slot:default>Hard-Coded Blog Post #1</template>
+      <template v-slot:default>Hard-Coded Blog Post #2</template>
 
       <template v-slot:subtitle>
         <BlogPostMeta author="@bruno" date="2022-06-01" color="dark" />

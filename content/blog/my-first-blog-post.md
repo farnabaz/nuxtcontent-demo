@@ -1,5 +1,8 @@
 ---
 title: "My First Blog Post"
+author: "@bruno"
+dates:
+  published: "2022-05-01"
 ---
 
 # Sample Markdown
@@ -28,6 +31,8 @@ var foo = 'bar';
 function baz(s) {
    return foo + ':' + s;
 }
+
+const msg = 'hello'
 ```
 
 The end ...

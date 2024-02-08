@@ -1,41 +1,229 @@
-<script setup>
-useHead({
-  title: 'Nuxt 3 Bulma Blog Template',
-  link: [
-    {
-      rel: 'stylesheet',
-      href: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'
-    },
-    {
-      rel: 'stylesheet',
-      href: 'https://cdnjs.cloudflare.com/ajax/libs/overlayscrollbars/1.9.1/css/OverlayScrollbars.min.css'
-    },
-    {
-      rel: 'stylesheet',
-      href: 'https://fonts.googleapis.com/css?family=Open+Sans'
-    },
-    {
-      rel: 'stylesheet',
-      href: 'https://unpkg.com/bulma@0.9.3/css/bulma.min.css'
-    }
-  ]
-})
-</script>
-
 <template>
-  <TheNavbar />
+  <!-- Menu -->
+  <BrkMenuHorizontal :menuItems="itemArgs">
+  </BrkMenuHorizontal>
+  <!-- Core -->
   <div>
     <NuxtPage />
   </div>
+  <!-- Footer -->
+  <BrkTemplateFooter v-bind="footerArgs">
+ <template #logos>
+      <div style="margin: 16px; display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-evenly; align-items: center">
+        <img v-for="logo in footerArgs.logoItems" :key="logo" class="logo" style="max-width: 100%" :src="logo.src[0].path" :alt="logo.alt" />
+      </div>
+    </template>
+  </BrkTemplateFooter>
+  <!-- Print structure de menu -->
+  <!--pre>{{ navigation }}</pre-->
 </template>
 
-<style>
+<script setup>
+import { provide } from "vue";
+import { NuxtLink } from "#components";
+import { BrkMenuHorizontal } from "@baraka/baraka";
+
+provide("BarakaContext", "nuxt");
+provide("BarakaLink", NuxtLink);
+useHead({
+  title: 'LQ Nuxt Content',
+  link: [
+    // {
+    //   rel: 'stylesheet',
+    //   href: 'https://unpkg.com/bulma@0.9.3/css/bulma.min.css'
+    // } 
+  ]
+})
+
+//Fetch navigation menu princpal
+const { data: navigation } = await useAsyncData('navigation', () => fetchContentNavigation())
+
+const itemArgs = navigation.value.map(definePath)
+
+function definePath(nav) {
+  return {
+    text: nav.title,
+    icon: "",
+    accessibilityText: "Naviguer vers url",
+    link: nav._path,
+    minimized: false,
+    variant: "primary",
+  }
+}
+
+//Footer
+const footerArgs = {
+  brkNavFooterLinks: [
+    {
+      brkAccordionArgs: {
+        accessibilityLabel: "À propos de Loto-Québec",
+      },
+      inverted: false,
+      brkTitleArgs: {
+        title: "Service à la clientèle",
+        alignment: "left",
+        headerStyle: "heading4",
+      },
+      linkList: [
+        {
+          label: "FAQ",
+          link: "http://perdu.com",
+          icon: "help",
+        },
+        {
+          label: "Nous joindre",
+          link: "http://google.com",
+          icon: "call",
+        },
+      ],
+    },
+    {
+      brkAccordionArgs: {
+        accessibilityLabel: "À propos de Loto-Québec",
+      },
+      inverted: false,
+      brkTitleArgs: {
+        title: "Informations",
+        alignment: "left",
+        headerStyle: "heading4",
+      },
+      linkList: [
+        {
+          label: "Argent Web",
+          link: "http://perdu.com",
+        },
+        {
+          label: "Sécurité et intégrité",
+          link: "http://google.com",
+        },
+        {
+          label: "Aide technique",
+          link: "http://perdu.com",
+        },
+        {
+          label: "Carte du site",
+          link: "http://google.com",
+        },
+      ],
+    },
+    {
+      brkAccordionArgs: {
+        accessibilityLabel: "À propos de Loto-Québec",
+      },
+      inverted: false,
+      brkTitleArgs: {
+        title: "À propos de Loto-Québec",
+        alignment: "left",
+        headerStyle: "heading4",
+      },
+      linkList: [
+        {
+          label: "À propos de nous",
+          link: "http://perdu.com",
+        },
+        {
+          label: "Responsabilité sociétale",
+          link: "http://google.com",
+        },
+        {
+          label: "Accessibilté",
+          link: "http://google.com",
+        },
+        {
+          label: "Carrières",
+          link: "http://google.com",
+        },
+        {
+          label: "Salle de presse",
+          link: "http://google.com",
+        },
+      ],
+    },
+  ],
+  socialMedia: [
+    //Item 1
+    {
+      brkButtonArgs: {
+        link: "https://www.facebook.com/JeuxenligneLQ",
+        icon: "facebook",
+      },
+    },
+    {
+      brkButtonArgs: {
+        link: "https://www.twitter.com/LotoQuebec",
+        icon: "facebook",
+      },
+    },
+    {
+      brkButtonArgs: {
+        link: "https://www.youtube.com/user/espacejeux",
+        icon: "facebook",
+      },
+    },
+    {
+      brkButtonArgs: {
+        link: "https://www.linkedin.com/company/espacejeux-loto-qu-bec/",
+        icon: "facebook",
+      },
+    },
+  ],
+  menuItems: [
+    {
+      label: "Conditions d'utilisation",
+      link: "https://www.google.ca/",
+    },
+    {
+      label: "Conditions du jeu en ligne",
+      link: "https://www.google.ca/",
+    },
+    {
+      label: "Confidentialité",
+      link: "https://www.google.ca/",
+    },
+    {
+      label: "Réglementation",
+      link: "https://www.google.ca/",
+    },
+  ],
+  logoItems: [
+    {
+      alt: "Certification WLA",
+      link: "https://lotoquebec.com",
+      newTab: true,
+      sizing: "contain",
+      src: [{ path: "/images/template-footer/WLA-f.svg", width: "300w" }],
+    },
+    {
+      alt: "Certification WLA",
+      link: "https://lotoquebec.com",
+      newTab: true,
+      sizing: "contain",
+      src: [{ path: "/images/template-footer/WLA-f.svg", width: "300w" }],
+    },
+  ],
+  inverted: false,
+};
+</script>
+
+<style lang="scss">
+@import "bulma/sass/utilities/_all.sass";
+@import "bulma/sass/base/_all.sass";
+@import "bulma/sass/grid/_all.sass";
+@import "bulma/sass/layout/_all.sass";
+@import "bulma/sass/helpers/_all.sass";
+@import "bulma/sass/components/level.sass";
+@import "bulma/sass/elements/container.sass";
 html,
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
     Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
-  font-size: 14px;
   background: #f0f2f4;
+}
+h1,h2,h3{font-weight: bold;}
+h2{font-size: 1.5rem;}
+h3{font-size: 1.2rem;}
+p{
+  margin: 0.5rem 0;
 }
 
 a {
@@ -47,57 +235,5 @@ a:hover {
   color: #2d628f;
 }
 
-.navbar.is-white {
-  background: #f0f2f4;
-}
-.navbar-brand .brand-text {
-  font-size: 1.11rem;
-  font-weight: bold;
-}
-.articles {
-  margin: 5rem 0;
-  margin-top: -200px;
-}
-.articles .content p {
-  line-height: 1.9;
-  margin: 15px 0;
-}
-.author-image {
-  position: absolute;
-  top: -30px;
-  left: 50%;
-  width: 60px;
-  height: 60px;
-  margin-left: -30px;
-  border: 3px solid #ccc;
-  border-radius: 50%;
-}
-.media-center {
-  display: block;
-  margin-bottom: 1rem;
-}
-.article,
-.promo-block {
-  margin-top: 6rem;
-}
-div.column.is-8:first-child {
-  padding-top: 0;
-  margin-top: 0;
-}
-.article-title {
-  font-size: 2rem;
-  font-weight: lighter;
-  line-height: 2;
-}
-.article-subtitle {
-  color: #909aa0;
-  margin-bottom: 3rem;
-}
-.article-body {
-  line-height: 1.4;
-  margin: 0 6rem;
-}
-.promo-block .container {
-  margin: 1rem 5rem;
-}
+
 </style>

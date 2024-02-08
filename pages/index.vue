@@ -1,6 +1,112 @@
 <template>
   <main>
-    <TheHero> A Nuxt Content v2 Blog with Bulma </TheHero>
-    <BlogPostList />
+    <TheHero> Une expérience NuxtContent.v2</TheHero>
+      <!-- PROMO -->
+     <BrkPromo v-bind="promoPrimaryStandardArgs">
+        <template #smallmedia>
+          <BrkImage v-bind="smallBrkImageArgs" />
+        </template>
+        <template #largemedia>
+          <BrkImage v-bind="largeBrkImageArgs" />
+        </template>
+      </BrkPromo>
+
+    <!-- Groupe Card Hero -->
+     <BrkTemplateColumns :nbColumnsMax="4" class="mt-5">
+      <template #title>
+        <BrkTitle
+          title="Template 4 colonnes"
+          headerSize="h2"
+          headerStyle="heading1"
+          alignment="left"
+          :nbrLimitedLines="0"
+          :isHidden="false"
+          :inverted="false"
+        >Offres de divertissement</BrkTitle>
+      </template>
+      <template #content>
+        <BrkCardHero
+          v-for       ="offer in offersList"
+          :key        ="offer._path"
+          :title      ="offer.title"
+          :postTitle  ="offer.description"
+          :link       ="offer._path"
+          :brkButtonArgs="{
+              accessibilityText: '',
+              inverted: false,
+              label: 'Info',
+              link: offer._path,
+              size: 'lg',
+              variant: 'secondary'
+          }"
+        >
+          <template #image>
+            <BrkImage 
+              v-bind="{
+                alt: 'Image divertissement',
+                src: [{ path: `images/${offer._path}_300.jpg`, width: '300w' }],
+                sizing: 'cover'
+              }" 
+            />
+          </template>
+        </BrkCardHero>
+
+       
+      </template>
+    </BrkTemplateColumns>
+    
   </main>
 </template>
+
+<script setup>
+import { BrkMenuHorizontal, BrkPromo, BrkImage, BrkTagOverlay, BrkCardSecondaryInfoLogo,BrkTemplateColumns,BrkCardHero,BrkTitle,BrkCardSecondaryInfoText } from "@baraka/baraka";
+
+//Hero section
+const { data: accueil } = await useAsyncData('accueil', () => queryContent('/accueil').findOne())
+
+//Liste des offres de divertissement
+const { data: offersList } = useAsyncData('offersList', () => {
+  return queryContent('/divertissement').find()
+})
+
+//Valeurs de composantes baraka
+const brkButtonArgs = {
+  accessibilityText: "",
+  inverted: false,
+  label: "Jouer",
+  link: "https://perdu.com",
+  size: "md",
+  variant: "tertiary",
+};
+
+const smallBrkImageArgs = {
+alt: "Logo mega jackpot",
+sizing: "cover",
+  src: [{ path: `${accueil.value.hero.image._1080}`, width: "1080w" }],
+};
+
+const largeBrkImageArgs = {
+  alt: "Logo mega jackpot",
+  sizing: "cover",
+  src: [{ path: `${accueil.value.hero.image._1920}`, width: "1920w" }],
+};
+
+const promoBaseArgs = {
+  backgroundColor: "",
+  contentAlign: "left",
+  description: accueil.value.hero.tagline,
+  fullImage: true,
+  inverted: true,
+  preTitle: accueil.value.hero.pretitle,
+  title: accueil.value.hero.title,
+  titleElement: "h2",
+  variant: "primary",
+  withGradient: false,
+  brkButtonArgs: brkButtonArgs,
+};
+
+const promoPrimaryStandardArgs = {
+  ...promoBaseArgs,
+};
+
+</script>

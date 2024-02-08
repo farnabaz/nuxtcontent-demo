@@ -6,12 +6,19 @@ const isMobileNavOpen = ref(false)
   <nav class="navbar">
     <div class="container">
       <div class="navbar-brand">
-        <nuxt-link to="/" class="navbar-item has-text-weight-bold is-size-5">
-          My Nuxt 3 Blog
+        <nuxt-link to="/" class="navbar-item is-size-5">
+          Home
+        </nuxt-link>
+         <nuxt-link to="/about" class="navbar-item is-size-5">
+          About
         </nuxt-link>
       </div>
     </div>
   </nav>
 </template>
 
-<style></style>
+<style>
+.router-link-active{
+  text-decoration: underline;
+}
+</style>

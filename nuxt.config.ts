@@ -7,7 +7,7 @@ export default defineNuxtConfig({
     global: true,
     dirs: ['node_modules/@baraka/baraka/dist/components','~/components']
   },
-  modules: ['@nuxt/content'],
+  modules: ['@nuxt/content','@nuxthq/studio'],
   content: {
     highlight: {
       theme: 'github-light'

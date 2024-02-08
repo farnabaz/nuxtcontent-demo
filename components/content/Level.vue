@@ -1,8 +1,8 @@
 <template>
 <div :class="[props.background, 'vue-level']">
 <div class="level" :style="`color:${textColor}; text-align:${align}`">
-  
-     <!-- Left side -->
+    <div v-if="$slots.default"><slot/></div>
+    <!-- Left side -->
     <div class="level-left" v-if="$slots.left">
         <div class="level-item">
             <ContentSlot :use="$slots.left"/>
@@ -47,7 +47,6 @@ const props = defineProps({
     .level-right,.level-left{
         max-width: 100%;
     }
-    
 }
 
 .orange{

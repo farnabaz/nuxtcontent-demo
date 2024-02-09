@@ -62,7 +62,7 @@
 import { BrkMenuHorizontal, BrkPromo, BrkImage, BrkTagOverlay, BrkCardSecondaryInfoLogo,BrkTemplateColumns,BrkCardHero,BrkTitle,BrkCardSecondaryInfoText } from "@baraka/baraka";
 
 //Hero section
-const { data: accueil } = await useAsyncData('accueil', () => queryContent('/accueil').findOne())
+const { data: accueil } = await useAsyncData('accueil', () => queryContent('/').findOne())
 
 //Liste des offres de divertissement
 const { data: offersList } = useAsyncData('offersList', () => {

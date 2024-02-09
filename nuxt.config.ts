@@ -8,6 +8,10 @@ export default defineNuxtConfig({
     dirs: ['node_modules/@baraka/baraka/dist/components','~/components']
   },
   modules: ['@nuxt/content','@nuxthq/studio'],
+  // force module initialization on dev env
+  studio: {
+    enabled: true
+  },
   content: {
     highlight: {
       theme: 'github-light'

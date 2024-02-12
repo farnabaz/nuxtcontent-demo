@@ -2,7 +2,10 @@
   <main>
     <TheHero> Une expérience NuxtContent.v2</TheHero>
       <!-- PROMO -->
-     <BrkPromo v-bind="promoPrimaryStandardArgs">
+     <BrkPromo v-bind="{
+      ...promoPrimaryStandardArgs,
+      title: accueil.hero.title
+      }">
         <template #smallmedia>
           <BrkImage v-bind="smallBrkImageArgs" />
         </template>
@@ -62,7 +65,10 @@
 import { BrkMenuHorizontal, BrkPromo, BrkImage, BrkTagOverlay, BrkCardSecondaryInfoLogo,BrkTemplateColumns,BrkCardHero,BrkTitle,BrkCardSecondaryInfoText } from "@baraka/baraka";
 
 //Hero section
-const { data: accueil } = await useAsyncData('accueil', () => queryContent('/').findOne())
+const { path:route } = useRoute()
+const { data: accueil } = await useAsyncData(`content-${route}`, () => {
+  return queryContent().where({ _path: route }).findOne()
+})
 
 //Liste des offres de divertissement
 const { data: offersList } = useAsyncData('offersList', () => {
@@ -98,7 +104,7 @@ const promoBaseArgs = {
   fullImage: true,
   inverted: true,
   preTitle: accueil.value.hero.pretitle,
-  title: accueil.value.hero.title,
+  //title: accueil.value.hero.title,
   titleElement: "h2",
   variant: "primary",
   withGradient: false,

@@ -14,4 +14,3 @@ hero:
     _1920: /images/hero/hero_1920.jpg
     _1080: /images/hero/hero_1080.jpg
 ---
-xxx

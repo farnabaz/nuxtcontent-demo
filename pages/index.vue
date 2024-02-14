@@ -3,14 +3,26 @@
     <TheHero> Une expérience NuxtContent.v2</TheHero>
       <!-- PROMO -->
      <BrkPromo v-bind="{
-      ...promoPrimaryStandardArgs,
-      title: accueil.hero.title
+        ...promoPrimaryStandardArgs,
+        title: accueil.hero.title,
+        description: accueil.hero.tagline,
+        preTitle: accueil.hero.pretitle,
+        
+
       }">
         <template #smallmedia>
-          <BrkImage v-bind="smallBrkImageArgs" />
+          <BrkImage v-bind="{
+            alt: 'Logo mega jackpot',
+            sizing: 'cover',
+            src: [{ path: `${accueil.hero.image._1080}`, width: '1080w' }],
+            }" />
         </template>
         <template #largemedia>
-          <BrkImage v-bind="largeBrkImageArgs" />
+          <BrkImage v-bind="{
+            alt: 'Logo mega jackpot',
+            sizing: 'cover',
+            src: [{ path: `${accueil.hero.image._1920}`, width: '1920w' }],
+            }" />
         </template>
       </BrkPromo>
 
@@ -100,11 +112,8 @@ const largeBrkImageArgs = {
 const promoBaseArgs = {
   backgroundColor: "",
   contentAlign: "left",
-  description: accueil.value.hero.tagline,
   fullImage: true,
   inverted: true,
-  preTitle: accueil.value.hero.pretitle,
-  //title: accueil.value.hero.title,
   titleElement: "h2",
   variant: "primary",
   withGradient: false,

@@ -1,0 +1,16 @@
+---
+title: "Restaurants"
+description: "Prenez une pause saveurs"
+lieu: "Montréal"
+navigation: false
+---
+
+# Faites votre choix parmis nos trois restaurants
+
+Des produits frais du marché, une cuisine inventive du terroir remplie de découvertes québécoises et des plats conviviaux présentés avec élégance. D’un côté, appréciez la vue impressionnante sur la métropole qui s’anime. De l’autre, jetez un œil sur la cuisine ouverte et voyez les chefs préparer avec soin de savoureux plats. 
+
+Bon appétit.
+
+- L'instant
+- Le Montréal
+- Pavillon 67

@@ -1,6 +1,9 @@
 <template>
   <main>
-    <TheHero> Une expérience NuxtContent.v2</TheHero>
+    <TheHero> 
+      Une expérience NuxtContent.v2
+      {{ $t('welcome') }}
+      </TheHero>
       <!-- PROMO -->
      <BrkPromo v-bind="{
         ...promoPrimaryStandardArgs,
@@ -59,7 +62,7 @@
             <BrkImage 
               v-bind="{
                 alt: 'Image divertissement',
-                src: [{ path: `images/${offer._path}_300.jpg`, width: '300w' }],
+                src: [{ path: `images/${offer._path.replace('en/','')}_300.jpg`, width: '300w' }],
                 sizing: 'cover'
               }" 
             />
@@ -78,13 +81,22 @@ import { BrkMenuHorizontal, BrkPromo, BrkImage, BrkTagOverlay, BrkCardSecondaryI
 
 //Hero section
 const { path:route } = useRoute()
+
+//
+const { locale } = useI18n()
+const localePath = useLocalePath()
+
+//locale.value = "en"
+
+
 const { data: accueil } = await useAsyncData(`content-${route}`, () => {
   return queryContent().where({ _path: route }).findOne()
 })
 
 //Liste des offres de divertissement
+
 const { data: offersList } = useAsyncData('offersList', () => {
-  return queryContent('/divertissement').find()
+  return queryContent(localePath('/divertissement')).find()
 })
 
 //Valeurs de composantes baraka

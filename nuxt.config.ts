@@ -7,7 +7,16 @@ export default defineNuxtConfig({
     global: true,
     dirs: ['node_modules/@baraka/baraka/dist/components','~/components']
   },
-  modules: ['@nuxt/content','@nuxthq/studio'],
+  modules: [
+    '@nuxt/content',
+    '@nuxthq/studio',
+    '@nuxtjs/i18n',
+  ],
+  i18n: {
+    vueI18n: './i18n.config.ts' ,
+    locales: ['en', 'fr'], // used in URL path prefix
+    defaultLocale: 'fr', // default locale of your project for Nuxt pages and routings
+  },
   // force module initialization on dev env
   studio: {
     enabled: true

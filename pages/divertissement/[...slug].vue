@@ -12,7 +12,7 @@
       <BrkImage
       :src="[
         {
-          path: `/images${offre._path}_1920.jpg`,
+          path: `/images${offre._path.replace('en/','')}_1920.jpg`,
           width: '1920w',
         },
       ]"

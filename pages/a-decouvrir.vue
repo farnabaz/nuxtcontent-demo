@@ -1,5 +1,7 @@
 <template>
-    <h1>Nous voici sur la page "À découvrir"</h1>
+    <section id="page">
+ <ContentDoc />
+</section>
 </template>
 
 <script>

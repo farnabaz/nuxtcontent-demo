@@ -1,12 +1,14 @@
 <template>
-  <h1>Nous voici sur la page "À propos"</h1>
+<section id="page">
+ <ContentDoc />
+</section>
+ 
 </template>
 
-<script>
-export default {
+<script setup>
 
-}
 </script>
+
 
 <style>
 

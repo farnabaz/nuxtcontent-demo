@@ -2,6 +2,15 @@
   <!-- Menu -->
   <BrkMenuHorizontal :menuItems="itemArgs">
   </BrkMenuHorizontal>
+  <!--nav>
+    <ContentNavigation v-slot="{ navigation }">
+      <ul>
+        <li v-for="link of navigation[1].children" :key="link._path">
+          <NuxtLink :to="link._path">{{ link.title }}</NuxtLink>
+        </li>
+      </ul>
+    </ContentNavigation>
+  </nav-->
   <!-- Core -->
   <div>
     <NuxtPage />
@@ -34,11 +43,20 @@ useHead({
     // } 
   ]
 })
-
+const { locale } = useI18n()
 //Fetch navigation menu princpal
-const { data: navigation } = await useAsyncData('navigation', () => fetchContentNavigation())
+const localePath = useLocalePath()
+const query = queryContent({
+  where: {
+    _path: { $contains: `${localePath()}` }
+  }
+})
 
-const itemArgs = navigation.value.map(definePath)
+
+const { data: navigation } = await useAsyncData('navigation', () => fetchContentNavigation(query))
+console.log("l: ", navigation.value)
+//const itemArgs = navigation.value.map(definePath)
+const itemArgs = navigation.value[0].children.map(definePath)
 
 function definePath(nav) {
   return {
@@ -235,5 +253,8 @@ a:hover {
   color: #2d628f;
 }
 
+#page{
+  margin :2rem 1rem
+}
 
 </style>

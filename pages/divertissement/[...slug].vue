@@ -12,7 +12,7 @@
       <BrkImage
       :src="[
         {
-          path: `/images${offre._path.replace('en/','')}_1920.jpg`,
+          path: `/images${offre._path.replace(`${locale}/`,'')}_1920.jpg`,
           width: '1920w',
         },
       ]"
@@ -29,7 +29,7 @@
 <script setup>
 import { BrkPageHeader,BrkImage} from "@baraka/baraka";
 const { path:route } = useRoute()
-
+const { locale } = useI18n()
 const { data: offre } = await useAsyncData(`content-${route}`, () => {
   return queryContent().where({ _path: route }).findOne()
 })

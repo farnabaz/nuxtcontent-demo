@@ -3,10 +3,24 @@ export default defineI18nConfig(() => ({
     locale: 'fr',
     messages: {
       en: {
-        welcome: 'Hello world!'
+        hero:{
+          descr: "A NuxtContent.v2 Experiment",
+          btn: "Play",
+        },
+        offres: {
+          titre: "Entertainment offers"
+        }
       },
       fr: {
-        welcome: 'Bonjour le monde!'
+        hero: {
+          descr: "Une expérience NuxtContent.v2",
+          btn: "Jouer",
+        },
+        offres: {
+          titre: "Offres de divertissement"
+        }
+
+        
       }
     }
   }))

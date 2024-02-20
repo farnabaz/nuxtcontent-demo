@@ -1,8 +1,7 @@
 <template>
   <main>
     <TheHero> 
-      Une expérience NuxtContent.v2
-      {{ $t('welcome') }}
+      {{ $t('hero.descr')}}
       </TheHero>
       <!-- PROMO -->
      <BrkPromo v-bind="{
@@ -40,7 +39,7 @@
           :nbrLimitedLines="0"
           :isHidden="false"
           :inverted="false"
-        >Offres de divertissement</BrkTitle>
+        >{{$t("offres.titre")}}</BrkTitle>
       </template>
       <template #content>
         <BrkCardHero
@@ -62,7 +61,7 @@
             <BrkImage 
               v-bind="{
                 alt: 'Image divertissement',
-                src: [{ path: `images/${offer._path.replace('en/','')}_300.jpg`, width: '300w' }],
+                src: [{ path: `images/${offer._path.replace(`${locale}/`,'')}_300.jpg`, width: '300w' }],
                 sizing: 'cover'
               }" 
             />
@@ -81,13 +80,8 @@ import { BrkMenuHorizontal, BrkPromo, BrkImage, BrkTagOverlay, BrkCardSecondaryI
 
 //Hero section
 const { path:route } = useRoute()
-
-//
-const { locale } = useI18n()
+const { locale, t } = useI18n()
 const localePath = useLocalePath()
-
-//locale.value = "en"
-
 
 const { data: accueil } = await useAsyncData(`content-${route}`, () => {
   return queryContent().where({ _path: route }).findOne()
@@ -99,11 +93,12 @@ const { data: offersList } = useAsyncData('offersList', () => {
   return queryContent(localePath('/divertissement')).find()
 })
 
+
 //Valeurs de composantes baraka
 const brkButtonArgs = {
   accessibilityText: "",
   inverted: false,
-  label: "Jouer",
+  label: t('hero.btn'),
   link: "https://perdu.com",
   size: "md",
   variant: "tertiary",

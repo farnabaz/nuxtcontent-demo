@@ -54,7 +54,7 @@ const query = queryContent({
 
 
 const { data: navigation } = await useAsyncData('navigation', () => fetchContentNavigation(query))
-console.log("l: ", navigation.value)
+
 //const itemArgs = navigation.value.map(definePath)
 const itemArgs = navigation.value[0].children.map(definePath)
 

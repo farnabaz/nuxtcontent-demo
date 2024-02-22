@@ -9,7 +9,7 @@
   <div class="columns">
     
      <div v-for="col in cols" :key="col" class="column m-3" >
-        <slot :name="`col_${col}`" />
+        <ContentSlot :use="`col_${col}`"/>
     </div>
 
   </div>
